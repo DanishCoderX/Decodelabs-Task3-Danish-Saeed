@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="DecodeLabs Project 3 — Interactive Web Elements using JavaScript DOM manipulation." />
+  <title>DecodeLabs | Project 3 — Interactive Web Elements</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="P3.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER
+  ============================================================ -->
+  <header class="site-header">
+    <div class="site-header__inner container">
+      <a href="#main" class="site-header__logo">Danish Saeed</a>
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="#tabs">Tabs</a></li>
+          <li><a class="site-nav__link" href="#accordion">FAQ</a></li>
+          <li><a class="site-nav__link" href="#counter">Counter</a></li>
+          <li><a class="site-nav__link" href="#tasks">Tasks</a></li>
+        </ul>
+      </nav>
+
+      <!-- Dark mode toggle — Case Study from PDF page 16 -->
+      <!-- INPUT: user clicks this button -->
+      <button
+        class="theme-toggle js-theme-toggle"
+        aria-label="Toggle dark mode"
+        title="Toggle theme"
+      >🌙</button>
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       MAIN
+  ============================================================ -->
+  <main id="main">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero__inner container">
+        <p class="eyebrow">Project 3 · DecodeLabs Batch 2026</p>
+        <h1 class="hero__heading">
+          Interactive<br /><em>Web Elements.</em>
+        </h1>
+        <p class="hero__body">
+          JavaScript brings HTML and CSS to life. Every feature on this
+          page follows the <strong>IPO loop</strong> — Input (event),
+          Process (logic), Output (DOM mutation).
+        </p>
+
+        <!-- IPO badges -->
+        <div class="ipo-strip" aria-label="IPO Loop">
+          <div class="ipo-badge ipo-badge--input">
+            <span class="ipo-badge__label">INPUT</span>
+            <span class="ipo-badge__desc">User Event</span>
+          </div>
+          <span class="ipo-arrow" aria-hidden="true">→</span>
+          <div class="ipo-badge ipo-badge--process">
+            <span class="ipo-badge__label">PROCESS</span>
+            <span class="ipo-badge__desc">JS Logic</span>
+          </div>
+          <span class="ipo-arrow" aria-hidden="true">→</span>
+          <div class="ipo-badge ipo-badge--output">
+            <span class="ipo-badge__label">OUTPUT</span>
+            <span class="ipo-badge__desc">DOM Mutation</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         FEATURE 1: TAB SWITCHER
+         Demonstrates: addEventListener, classList.toggle, is- state
+    ============================================================ -->
+    <section class="section" id="tabs" aria-labelledby="tabs-heading">
+      <div class="container">
+
+        <header class="section__header">
+          <p class="eyebrow">Feature 01</p>
+          <h2 class="section__title" id="tabs-heading">Tab Switcher</h2>
+          <p class="section__desc">
+            Clicking a tab button fires a <code>click</code> event.
+            JavaScript toggles <code>.is-active</code> on the correct
+            panel. CSS handles the transition.
+          </p>
+        </header>
+
+        <div class="tab-widget">
+          <!-- Tab buttons — js- prefix for JS hooks (page 17) -->
+          <div class="tab-widget__nav" role="tablist" aria-label="JavaScript concepts">
+            <button
+              class="tab-btn is-active js-tab-btn"
+              role="tab"
+              data-tab="tab-dom"
+              aria-selected="true"
+              aria-controls="tab-dom"
+            >The DOM</button>
+            <button
+              class="tab-btn js-tab-btn"
+              role="tab"
+              data-tab="tab-events"
+              aria-selected="false"
+              aria-controls="tab-events"
+            >Events</button>
+            <button
+              class="tab-btn js-tab-btn"
+              role="tab"
+              data-tab="tab-state"
+              aria-selected="false"
+              aria-controls="tab-state"
+            >State</button>
+          </div>
+
+          <!-- Tab panels -->
+          <div id="tab-dom" class="tab-panel is-active js-tab-panel" role="tabpanel" aria-labelledby="tab-dom">
+            <h3 class="tab-panel__title">The Document Object Model</h3>
+            <p class="tab-panel__body">
+              The DOM is the browser's living map of your HTML. It translates
+              static markup into a tree of objects that JavaScript can read
+              and mutate. Every tag becomes a node; every node is addressable.
+            </p>
+            <div class="code-block">
+              <code>const el = document.querySelector('.js-hook');</code>
+            </div>
+          </div>
+
+          <div id="tab-events" class="tab-panel js-tab-panel" role="tabpanel" aria-labelledby="tab-events" hidden>
+            <h3 class="tab-panel__title">Event Listeners</h3>
+            <p class="tab-panel__body">
+              The browser listens for stimuli — clicks, keypresses, and
+              system triggers. <code>addEventListener</code> wires a specific
+              node to a handler function that fires when the event occurs.
+            </p>
+            <div class="code-block">
+              <code>btn.addEventListener('click', handleClick);</code>
+            </div>
+          </div>
+
+          <div id="tab-state" class="tab-panel js-tab-panel" role="tabpanel" aria-labelledby="tab-state" hidden>
+            <h3 class="tab-panel__title">State Management</h3>
+            <p class="tab-panel__body">
+              State is the collection of data that determines what the user
+              sees. Use <code>const</code> for DOM references that never
+              reassign, and <code>let</code> for values that must mutate.
+              Never use <code>var</code>.
+            </p>
+            <div class="code-block">
+              <code>let count = 0; &nbsp;// mutable state</code>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         FEATURE 2: ACCORDION / FAQ
+         Demonstrates: classList.toggle('is-open'), single-purpose fn
+    ============================================================ -->
+    <section class="section section--alt" id="accordion" aria-labelledby="accordion-heading">
+      <div class="container">
+
+        <header class="section__header">
+          <p class="eyebrow">Feature 02</p>
+          <h2 class="section__title" id="accordion-heading">Accordion FAQ</h2>
+          <p class="section__desc">
+            Each item uses <code>classList.toggle('is-open')</code>.
+            JavaScript controls the behavior; CSS handles the animation.
+          </p>
+        </header>
+
+        <div class="accordion" id="faq-accordion">
+
+          <div class="accordion__item js-accordion-item">
+            <button class="accordion__btn js-accordion-btn" aria-expanded="false">
+              <span>What is the IPO loop?</span>
+              <span class="accordion__icon" aria-hidden="true">+</span>
+            </button>
+            <div class="accordion__body">
+              <p>
+                Every interactive element follows the Input–Process–Output
+                loop. The <strong>Input</strong> is the user event (a click).
+                The <strong>Process</strong> is the JavaScript logic that
+                evaluates state. The <strong>Output</strong> is the visible
+                DOM mutation that results.
+              </p>
+            </div>
+          </div>
+
+          <div class="accordion__item js-accordion-item">
+            <button class="accordion__btn js-accordion-btn" aria-expanded="false">
+              <span>Why use textContent instead of innerHTML?</span>
+              <span class="accordion__icon" aria-hidden="true">+</span>
+            </button>
+            <div class="accordion__body">
+              <p>
+                <code>innerHTML</code> parses and renders HTML, which opens
+                a Cross-Site Scripting (XSS) vulnerability if the content
+                comes from user input. <code>textContent</code> treats
+                everything as plain text — it is safe by default.
+              </p>
+            </div>
+          </div>
+
+          <div class="accordion__item js-accordion-item">
+            <button class="accordion__btn js-accordion-btn" aria-expanded="false">
+              <span>What is the js- and is- naming convention?</span>
+              <span class="accordion__icon" aria-hidden="true">+</span>
+            </button>
+            <div class="accordion__body">
+              <p>
+                <code>js-</code> prefixed classes are JavaScript hooks only —
+                never styled with CSS. <code>is-</code> prefixed classes define
+                visual state (e.g. <code>.is-active</code>, <code>.is-open</code>)
+                and are toggled by JS but styled by CSS. This decoupling makes
+                code robust and maintainable.
+              </p>
+            </div>
+          </div>
+
+          <div class="accordion__item js-accordion-item">
+            <button class="accordion__btn js-accordion-btn" aria-expanded="false">
+              <span>What is the difference between const and let?</span>
+              <span class="accordion__icon" aria-hidden="true">+</span>
+            </button>
+            <div class="accordion__body">
+              <p>
+                <code>const</code> creates an immutable binding — use it for
+                DOM references and values that never reassign. <code>let</code>
+                is block-scoped and mutable — use it strictly when the value
+                must change, such as a counter. <code>var</code> is legacy and
+                should be avoided entirely.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         FEATURE 3: CHARACTER COUNTER
+         Demonstrates: input event, textContent update, state classes
+    ============================================================ -->
+    <section class="section" id="counter" aria-labelledby="counter-heading">
+      <div class="container">
+
+        <header class="section__header">
+          <p class="eyebrow">Feature 03</p>
+          <h2 class="section__title" id="counter-heading">Character Counter</h2>
+          <p class="section__desc">
+            Listens for the <code>input</code> event. Updates
+            <code>textContent</code> in real-time. Adds <code>.is-warning</code>
+            and <code>.is-error</code> state classes as the limit approaches.
+          </p>
+        </header>
+
+        <div class="counter-widget">
+          <label class="counter-widget__label" for="message-input">
+            Write a message
+          </label>
+          <textarea
+            id="message-input"
+            class="counter-widget__textarea js-textarea"
+            placeholder="Start typing…"
+            maxlength="150"
+            rows="4"
+            aria-describedby="char-count"
+          ></textarea>
+          <div class="counter-widget__footer">
+            <span
+              id="char-count"
+              class="char-count js-char-count"
+              aria-live="polite"
+              aria-atomic="true"
+            >0 / 150</span>
+            <button class="btn btn--ghost js-clear-textarea">Clear</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         FEATURE 4: DYNAMIC TASK LIST
+         Demonstrates: createElement, appendChild, textContent,
+                       dynamic node creation and deletion
+    ============================================================ -->
+    <section class="section section--alt" id="tasks" aria-labelledby="tasks-heading">
+      <div class="container">
+
+        <header class="section__header">
+          <p class="eyebrow">Feature 04</p>
+          <h2 class="section__title" id="tasks-heading">Dynamic Task List</h2>
+          <p class="section__desc">
+            Uses <code>document.createElement()</code> and
+            <code>appendChild()</code> to build new DOM nodes on the fly.
+            Delete uses <code>element.remove()</code>. All text injected via
+            <code>textContent</code> — never <code>innerHTML</code>.
+          </p>
+        </header>
+
+        <div class="task-widget">
+          <div class="task-widget__input-row">
+            <label for="task-input" class="sr-only">New task</label>
+            <input
+              id="task-input"
+              type="text"
+              class="task-widget__input js-task-input"
+              placeholder="Add a new task…"
+              maxlength="80"
+              aria-label="New task"
+            />
+            <button class="btn btn--primary js-add-task" aria-label="Add task">
+              + Add
+            </button>
+          </div>
+
+          <!-- Empty state -->
+          <p class="task-widget__empty js-task-empty" aria-live="polite">
+            No tasks yet. Add one above.
+          </p>
+
+          <!-- Task list — items injected by JS -->
+          <ul class="task-list js-task-list" aria-label="Task list" aria-live="polite"></ul>
+
+          <!-- Footer counter -->
+          <div class="task-widget__footer">
+            <span class="task-widget__count js-task-count">0 tasks</span>
+            <button class="btn btn--ghost js-clear-tasks">Clear All</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ============================================================
+       TOAST NOTIFICATION — injected by JS, not present in HTML
+  ============================================================ -->
+  <div class="toast-container js-toast-container" aria-live="assertive" aria-atomic="true"></div>
+
+
+  <!-- FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="site-footer__inner container">
+      <p class="site-footer__copy">© 2026 DecodeLabs Frontend Development · Batch 2026</p>
+      <nav class="site-footer__nav" aria-label="Footer navigation">
+        <a class="site-footer__link" href="#tabs">Tabs</a>
+        <a class="site-footer__link" href="#accordion">FAQ</a>
+        <a class="site-footer__link" href="#counter">Counter</a>
+        <a class="site-footer__link" href="#tasks">Tasks</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- External JS — loaded at end of body so DOM is ready -->
+  <script src="P3.js"></script>
+
+</body>
+</html>
